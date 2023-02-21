@@ -1,0 +1,43 @@
+{
+    "plugins": ["wdio", "mocha"],
+    "env": {
+        "node": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:wdio/recommended",
+        "plugin:mocha/recommended"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "no-trailing-spaces": [
+            "warn"
+        ],
+        "eol-last": [
+            "warn",
+            "always"
+        ]
+    }
+}
