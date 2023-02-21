@@ -6,7 +6,7 @@ jobs:
   build:
     environment: testing
     env:
-      APP_PATH: ${{ github.workspace }}/test.app
+      APP_PATH: ${{ github.workspace }}/app/test.app
       DEVICE_NAME: 'iPhone 14 Pro'
       PLATFORM_VERSION: '16.2'
     runs-on: macos-12
@@ -32,8 +32,8 @@ jobs:
         - name: Download and unzip test app
           run: |
             curl -L ${{ vars.APP_URL }} -o app.zip
-            echo $APP_PATH
-            unzip app.zip $APP_PATH
+            mkdir app
+            unzip app.zip -d $APP_PATH
             rm -f app.zip
         
         - name: Install
@@ -42,6 +42,8 @@ jobs:
         - name: Run Test
           run: npm run test
         
+        - run: mkdir logs
+
         - uses: actions/upload-artifact@v1
           if: failure()
           with:
