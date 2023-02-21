@@ -7,35 +7,37 @@ jobs:
     environment: CI
     env:
       APP_PATH: ${{ vars.GITHUB_WORKSPACE }}/test.app
-      DEVICE_NAME: iPhone 14 Pro
-      PLATFORM_VERSION: 16.2
+      DEVICE_NAME: 'iPhone 14 Pro'
+      PLATFORM_VERSION: '16.2'
     runs-on: macos-12
     steps:
         - name: Checkout
           uses: actions/checkout@v3
         
+        - name: Setup env
+          run: |
+            touch .env
+            echo DEVICE_NAME=$DEVICE_NAME >> .env
+            echo PLATFORM_VERSION=$PLATFORM_VERSION >> .env
         - uses: actions/setup-node@v3
           with:
             node-version: 18
         
         - uses: futureware-tech/simulator-action@v2
           with:
-            model: $DEVICE_NAME
-            os_version: $PLATFORM_VERSION
+            model: 'iPhone 14 Pro'
+            os_version: '16.2'
         
-        - name: Download test app
-          run: curl -L ${{ vars.APP_URL }} -o app.zip
-    
-        - name: Unzip app
-          run: unzip app.zip $APP_PATH
-          
-        - name: Delete app
-          run: rm -f app.zip
+        - name: Download and unzip test app
+          run: |
+            curl -L ${{ vars.APP_URL }} -o app.zip
+            unzip app.zip $APP_PATH
+            rm -f app.zip
         
         - name: Install
           run: npm install
         
-        - name: Test
+        - name: Run Test
           run: npm run test
         
         - uses: actions/upload-artifact@v1
