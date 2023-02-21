@@ -43,6 +43,7 @@ jobs:
           run: npm run test
         
         - run: mkdir logs
+          if: failure()
 
         - uses: actions/upload-artifact@v1
           if: failure()
