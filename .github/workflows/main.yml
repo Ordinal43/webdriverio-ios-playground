@@ -20,9 +20,12 @@ jobs:
             echo APP_PATH=$APP_PATH >> .env
             echo DEVICE_NAME=$DEVICE_NAME >> .env
             echo PLATFORM_VERSION=$PLATFORM_VERSION >> .env
+        
         - uses: actions/setup-node@v3
           with:
             node-version: 18
+        
+        - uses: moatazeldebsy/appium-server-gitHub-action@V1.0.4
         
         - uses: futureware-tech/simulator-action@v2
           with:
