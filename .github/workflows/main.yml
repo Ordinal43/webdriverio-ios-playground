@@ -6,7 +6,7 @@ jobs:
   build:
     environment: testing
     env:
-      APP_PATH: ${{ github.workspace }}/app/test.app
+      APP_PATH: ${{ github.workspace }}/test.app
       DEVICE_NAME: 'iPhone 14 Pro'
       PLATFORM_VERSION: '16.2'
     runs-on: macos-12
@@ -38,7 +38,6 @@ jobs:
         - name: Download and unzip test app
           run: |
             curl -L ${{ vars.APP_URL }} -o app.zip
-            mkdir app
             unzip app.zip -d $APP_PATH
             rm -f app.zip
         
