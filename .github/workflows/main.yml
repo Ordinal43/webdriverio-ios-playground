@@ -43,7 +43,7 @@ jobs:
             rm -f app.zip
         
         - name: Install
-          run: npm i --production
+          run: npm i --omit=dev
         
         - name: Run Test
           run: npm run test
