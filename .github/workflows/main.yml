@@ -25,7 +25,10 @@ jobs:
           with:
             node-version: 18
         
-        - uses: moatazeldebsy/appium-server-gitHub-action@V1.0.4
+        - name: Install Appium Server
+          run: |
+            npm install -g appium@next
+            appium driver install xcuitest 
         
         - uses: futureware-tech/simulator-action@v2
           with:
@@ -40,16 +43,7 @@ jobs:
             rm -f app.zip
         
         - name: Install
-          run: npm install
+          run: npm i --production
         
         - name: Run Test
           run: npm run test
-        
-        - run: mkdir logs
-          if: failure()
-
-        - uses: actions/upload-artifact@v1
-          if: failure()
-          with:
-            name: logs
-            path: logs
