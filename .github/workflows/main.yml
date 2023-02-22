@@ -38,8 +38,7 @@ jobs:
         - name: Download and unzip test app
           run: |
             curl -L ${{ vars.APP_URL }} -o app.zip
-            unzip app.zip -d $APP_PATH
-            rm -f app.zip
+            mv app.zip $APP_PATH
         
         - name: Install
           run: npm i --omit=dev
