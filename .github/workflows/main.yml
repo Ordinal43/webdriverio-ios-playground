@@ -10,6 +10,8 @@ jobs:
       SAUCELABS_ACCESS_KEY: ${{ secrets.SAUCELABS_ACCESS_KEY }}
       SAUCELABS_HOST: ${{ secrets.SAUCELABS_HOST }}
 
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
       APP_URL: ${{ secrets.APP_URL }}
       DEVICE_NAME: iPhone 11 Simulator
       PLATFORM_VERSION: 16.2
