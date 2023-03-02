@@ -22,15 +22,13 @@ jobs:
           run: |
             echo $DEVICE_NAME
             echo $PLATFORM_VERSION
-            echo $SAUCELABS_USERNAME
-            echo $SAUCELABS_HOST
         
-        # - uses: actions/setup-node@v3
-        #   with:
-        #     node-version: 18
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 18
         
-        # - name: Install
-        #   run: npm i --omit=dev
+        - name: Install
+          run: npm i --omit=dev
         
-        # - name: Run Test
-        #   run: npm run test
+        - name: Run Test
+          run: npm run test
