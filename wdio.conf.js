@@ -10,8 +10,10 @@ exports.config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    
-    port: 4723,
+    user: ENV.SAUCELABS_USERNAME,
+    key: ENV.SAUCELABS_ACCESS_KEY,
+    hostname: ENV.SAUCELABS_HOST,
+    port: 443,
     //
     // ==================
     // Specify Test Files
@@ -51,30 +53,30 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    maxInstances: 3,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-    
         /**
          * maxInstances can get overwritten per capability. So if you have an in-house Selenium
          * grid with only 5 firefox instances available you can make sure that not more than
          * 5 instances get started at a time.
          */
-        // maxInstances: 5,
+        maxInstances: 3,
         //
         platformName: "iOS",
-        "appium:platformVersion": ENV.PLATFORM_VERSION,
-        "appium:deviceName": ENV.DEVICE_NAME,
-        "appium:app": ENV.APP_PATH,
-        "appium:automationName": "XCUITest"
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
+        'appium:app': ENV.APP_URL,
+        'appium:deviceName': ENV.DEVICE_NAME,
+        'appium:platformVersion': ENV.PLATFORM_VERSION,
+        'appium:automationName': 'XCUITest',
+        'sauce:options': {
+            appiumVersion: '2.0.0-beta44',
+            build: "appium-build-8OFQF",
+            name: "Automation iOS trial",
+        }
     }],
     //
     // ===================
@@ -107,7 +109,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: 'wd/hub',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -123,11 +125,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [
-        ['appium', {
-            command: 'appium'
-        }]
-    ],
+    services: [],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
