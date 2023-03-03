@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "wdio run ./wdio.conf.js",
+    "test": "wdio run ./config/wdio-ci.conf.js",
+    "test:local": "wdio run ./config/wdio-local.conf.js",
     "lint": "eslint '**/*.js'",
     "lint:fix": "npm run lint -- --fix"
   },
