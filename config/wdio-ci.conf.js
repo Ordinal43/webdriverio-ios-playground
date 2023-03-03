@@ -1,17 +1,15 @@
 import dotenv from 'dotenv'
+import commonConfig from './_common.conf'
 
 dotenv.config()
 const ENV = process.env
 
 exports.config = {
-    runner: 'local',
+    ...commonConfig,
     user: ENV.SAUCELABS_USERNAME,
     key: ENV.SAUCELABS_ACCESS_KEY,
     hostname: ENV.SAUCELABS_HOST,
     port: 443,
-    specs: [
-        './test/specs/**/*.js'
-    ],
     maxInstances: 3,
     capabilities: [{
         maxInstances: 3,
@@ -26,19 +24,7 @@ exports.config = {
             name: 'Automation iOS trial',
         }
     }],
-    logLevel: 'error',
-    bail: 0,
-    baseUrl: 'wd/hub',
-    waitforTimeout: 10000,
-    connectionRetryTimeout: 120000,
-    connectionRetryCount: 3,
     services: [],
-    framework: 'mocha',
-    reporters: [ 'spec' ],
-    mochaOpts: {
-        ui: 'bdd',
-        timeout: 60000
-    },
 
     //
     // =====
