@@ -4,6 +4,8 @@ describe('Second test', function() {
         await $('~input-email').setValue('test@mail.com')
         await $('~input-password').setValue('12345678')
 
+        await $('~button-LOGIN').click()
+
         await expect($('~Wrong!')).toBeDisplayed()
     })
 })
