@@ -1,4 +1,4 @@
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 
 dotenv.config()
 const ENV = process.env
@@ -11,11 +11,11 @@ exports.config = {
     ],
     maxInstances: 1,
     capabilities: [{
-        platformName: "iOS",
-        "appium:platformVersion": ENV.PLATFORM_VERSION,
-        "appium:deviceName": ENV.DEVICE_NAME,
-        "appium:app": ENV.APP_URL,
-        "appium:automationName": "XCUITest"
+        platformName: 'iOS',
+        'appium:platformVersion': ENV.PLATFORM_VERSION,
+        'appium:deviceName': ENV.DEVICE_NAME,
+        'appium:app': ENV.APP_URL,
+        'appium:automationName': 'XCUITest'
     }],
     logLevel: 'error',
     bail: 0,
