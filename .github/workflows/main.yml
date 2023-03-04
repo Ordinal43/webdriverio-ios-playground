@@ -4,42 +4,33 @@ on:
   
 jobs:
   build:
-    environment: CI
+    environment: testing
     env:
-      APP_PATH: ${{ vars.GITHUB_WORKSPACE }}/test.app
-      DEVICE_NAME: iPhone 14 Pro
+      SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
+      SAUCELABS_ACCESS_KEY: ${{ secrets.SAUCELABS_ACCESS_KEY }}
+      SAUCELABS_HOST: ${{ secrets.SAUCELABS_HOST }}
+
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      APP_URL: ${{ secrets.APP_URL }}
+      DEVICE_NAME: iPhone 11 Simulator
       PLATFORM_VERSION: 16.2
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     steps:
         - name: Checkout
           uses: actions/checkout@v3
+        
+        - name: Setup env
+          run: |
+            echo $DEVICE_NAME
+            echo $PLATFORM_VERSION
         
         - uses: actions/setup-node@v3
           with:
             node-version: 18
         
-        - uses: futureware-tech/simulator-action@v2
-          with:
-            model: $DEVICE_NAME
-            os_version: $PLATFORM_VERSION
-        
-        - name: Download test app
-          run: curl -L ${{ vars.APP_URL }} -o app.zip
-    
-        - name: Unzip app
-          run: unzip app.zip $APP_PATH
-          
-        - name: Delete app
-          run: rm -f app.zip
-        
         - name: Install
-          run: npm install
+          run: npm i --omit=dev
         
-        - name: Test
+        - name: Run Test
           run: npm run test
-        
-        - uses: actions/upload-artifact@v1
-          if: failure()
-          with:
-            name: logs
-            path: logs
