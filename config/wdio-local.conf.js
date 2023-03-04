@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import commonConfig from './_common.conf'
+import slack from '../services/slack.service'
 
 dotenv.config()
 const ENV = process.env
@@ -19,6 +20,11 @@ exports.config = {
     services: [
         ['appium', {
             command: 'appium'
+        }],
+        [slack, {
+            webHookUrl: ENV.SLACK_WEBHOOK_URL, // Used to post notification to a particular channel
+            notifyOnlyOnFailure: false, // Send notification only on test failure
+            messageTitle: 'Test Report' // Name of the notification
         }]
     ]
 
